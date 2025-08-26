@@ -1,0 +1,53 @@
+node_modules
+# Keep environment variables out of version control
+.env
+
+/generated/prisma
+
+/generated/prisma
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Env
+.env
+.env.test
+.env.local
+.env.development.local
+.env.production.local
+
+# Prisma
+/prisma/dev.db        # SQLite local DB (ignore in git)
+!/prisma/migrations/  # keep migrations in git
+/prisma/*.db-journal  # SQLite journal files
+
+# Logs
+logs
+*.log
+*.tmp
+
+# Build output
+dist/
+build/
+.cache/
+.next/
+out/
+
+# TypeScript
+*.tsbuildinfo
+
+# VSCode / IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Coverage
+coverage/
+
+# Misc
+*.swp
+
+/generated/prisma
