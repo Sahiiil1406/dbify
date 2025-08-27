@@ -106,11 +106,4 @@ Below is the high-level system architecture of Dbify:
 * [ ] Multi-tenant support.
 * [ ] SDKs for JavaScript, Python, and Go.
 * [ ] Webhooks for real-time notifications.
-
----
-
----
-
-## 📜 License
-
-MIT License
+* [ ] 
