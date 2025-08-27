@@ -6,15 +6,17 @@ const crypto = require("crypto");
 const generateApiKey = () => crypto.randomBytes(9).toString("hex");
 
 const createProject = async (req, res) => {
-  const { name, description } = req.body;
+  const { title, description, dbUrl, dbType } = req.body;
 
   const apiKey = generateApiKey();
   //console.log(req.user)
   try {
     const project = await prisma.project.create({
       data: {
-        title: name,
+        title,
         description,
+        dbUrl,
+        dbType,
         user: {
           connect: { id: req.user.userId },
         },

@@ -3,6 +3,7 @@ require('dotenv').config();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const {connectRabbitMQ}=require('./config/taskQueue');
+const {connectRedis} =require('./config/redis.js')
 const { PrismaClient } = require('@prisma/client');
 const userRoutes = require('./routes/user.routes.js');
 const projectRoutes = require('./routes/project.routes.js');
@@ -29,6 +30,7 @@ app.use('/api/projects', projectRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
+  connectRedis()
   connectRabbitMQ()
   console.log(`Server is running on port ${PORT}`);
 });

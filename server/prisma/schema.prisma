@@ -24,6 +24,8 @@ model Project {
   id          Int     @id @default(autoincrement())
   title       String
   description String?
+  dbUrl       String? @unique
+  dbType      String  @default("postgresql")
   apiKey      String  @unique
   userId      Int
   user        User    @relation(fields: [userId], references: [id])
