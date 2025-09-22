@@ -40,6 +40,13 @@ Dbify is a platform that allows users to instantly generate CRUD APIs on top of 
   * Built-in API documentation.
   * Support for cron operations.
 
+   <img width="1854" height="936" alt="image" src="https://github.com/user-attachments/assets/a61b8bc1-f568-453b-ae06-bb8852ab6fa4" />
+   <img width="1552" height="822" alt="image" src="https://github.com/user-attachments/assets/223e953b-a000-4d48-b28b-aaf18e21112a" />
+   <img width="1538" height="939" alt="image" src="https://github.com/user-attachments/assets/496b53e7-6f19-4989-b9d6-4d456e7968b0" />
+
+
+
+
 ---
 
 ## 📐 Architecture
