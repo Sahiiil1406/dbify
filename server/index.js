@@ -8,6 +8,7 @@ const { PrismaClient } = require('@prisma/client');
 const userRoutes = require('./routes/user.routes.js');
 const projectRoutes = require('./routes/project.routes.js');
 const crudRoutes = require('./routes/crud.routes.js');
+const docsRoutes = require('./routes/docs.routes.js');
 const prisma = new PrismaClient();
 
 const app = express();
@@ -28,7 +29,7 @@ app.get('/health', (req, res) => {
 app.use('/api/users', userRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/crud', crudRoutes);
-
+app.use('/api/docs', docsRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
