@@ -2,7 +2,7 @@ const router=require('express').Router();
 const { createProject, updateProject, deleteProject, getProject, getMyProjects }=require('../controllers/project.js');
 const {initialiseProject,stopProject
     ,getDetailedSchema,updateProjectSchema
-}=require('../controllers/crud-logic.js');
+}=require('../controllers/schema.js');
 const { authenticateToken }=require('../middleware/user.middleware.js');
 
 router.post('/', authenticateToken, createProject);

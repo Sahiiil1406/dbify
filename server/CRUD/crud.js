@@ -2,12 +2,12 @@ class DatabaseCRUD {
   constructor(db, schema) {
     this.db = db;
     this.schema = schema;
+    //console.log('Initialized DatabaseCRUD with schema:', schema);
   }
-
-
   async create(tableName, data) {
     try {
-      if (!this.schema[tableName]) {
+
+      if (!this.schema.schema[tableName]) {
         throw new Error(`Table '${tableName}' not found in schema`);
       }
 
@@ -29,7 +29,9 @@ class DatabaseCRUD {
   // READ - Get data from table
   async read(tableName, conditions = {}, options = {}) {
     try {
-      if (!this.schema[tableName]) {
+      //console.log(this.schema.schema[tableName]);
+      if (!this.schema.schema[tableName]) {
+        //console.log(tableName,conditions, options);
         throw new Error(`Table '${tableName}' not found in schema`);
       }
 
@@ -70,7 +72,7 @@ class DatabaseCRUD {
   // UPDATE - Update data in table
   async update(tableName, conditions, data) {
     try {
-      if (!this.schema[tableName]) {
+      if (!this.schema.schema[tableName]) {
         throw new Error(`Table '${tableName}' not found in schema`);
       }
 
@@ -97,7 +99,7 @@ class DatabaseCRUD {
   // DELETE - Delete data from table
   async delete(tableName, conditions) {
     try {
-      if (!this.schema[tableName]) {
+      if (!this.schema.schema[tableName]) {
         throw new Error(`Table '${tableName}' not found in schema`);
       }
 
