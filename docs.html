@@ -12,22 +12,23 @@
         }
         
         :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-card: #ffffff;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --border: #e2e8f0;
-            --border-light: #f1f5f9;
-            --accent: #0ea5e9;
-            --accent-light: #e0f2fe;
-            --success: #059669;
-            --warning: #d97706;
-            --error: #dc2626;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a3a3a3;
+            --text-muted: #737373;
+            --border: #262626;
+            --border-light: #1f1f1f;
+            --accent: #fbbf24;
+            --accent-light: #fef3c7;
+            --accent-dark: #f59e0b;
+            --success: #22c55e;
+            --warning: #f97316;
+            --error: #ef4444;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
         }
         
         body {
@@ -68,8 +69,8 @@
         }
         
         .error {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid #404040;
             border-radius: 8px;
             padding: 2rem;
             text-align: center;
@@ -121,8 +122,8 @@
         
         .endpoint-badge {
             display: inline-block;
-            background: var(--bg-secondary);
-            color: var(--text-primary);
+            background: var(--bg-card);
+            color: var(--accent);
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
             font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
@@ -239,8 +240,8 @@
         .column-type {
             font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
             font-size: 0.8125rem;
-            color: var(--text-secondary);
-            background: var(--bg-secondary);
+            color: var(--accent);
+            background: rgba(251, 191, 36, 0.1);
             padding: 0.125rem 0.5rem;
             border-radius: 4px;
         }
@@ -256,13 +257,13 @@
         }
         
         .badge-primary {
-            background: #fef3c7;
-            color: #92400e;
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--accent);
         }
         
         .badge-success {
-            background: #d1fae5;
-            color: #065f46;
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--success);
         }
         
         .badge-secondary {
@@ -291,6 +292,7 @@
         .endpoint-card:hover {
             box-shadow: var(--shadow-md);
             border-color: var(--accent);
+            transform: translateY(-1px);
         }
         
         .endpoint-header {
@@ -312,22 +314,22 @@
         }
         
         .method-create {
-            background: #d1fae5;
+            background: rgba(34, 197, 94, 0.2);
             color: var(--success);
         }
         
         .method-read {
-            background: var(--accent-light);
+            background: rgba(251, 191, 36, 0.2);
             color: var(--accent);
         }
         
         .method-update {
-            background: #fef3c7;
+            background: rgba(249, 115, 22, 0.2);
             color: var(--warning);
         }
         
         .method-delete {
-            background: #fee2e2;
+            background: rgba(239, 68, 68, 0.2);
             color: var(--error);
         }
         
@@ -338,7 +340,7 @@
         }
         
         .code-block {
-            background: #f8fafc;
+            background: #0f0f0f;
             padding: 1rem;
             font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
             font-size: 0.75rem;
@@ -346,13 +348,15 @@
             overflow-x: auto;
             position: relative;
             border-top: 1px solid var(--border-light);
+            border: 1px solid var(--border);
+            border-radius: 0 0 8px 8px;
         }
         
         .copy-btn {
             position: absolute;
             top: 0.75rem;
             right: 0.75rem;
-            background: var(--bg-primary);
+            background: var(--bg-card);
             color: var(--text-secondary);
             border: 1px solid var(--border);
             padding: 0.25rem 0.5rem;
@@ -364,7 +368,7 @@
         
         .copy-btn:hover {
             background: var(--accent);
-            color: white;
+            color: var(--bg-primary);
             border-color: var(--accent);
         }
         
@@ -437,12 +441,12 @@
         }
         
         .success-header {
-            background: #d1fae5;
+            background: rgba(34, 197, 94, 0.2);
             color: var(--success);
         }
         
         .error-header {
-            background: #fee2e2;
+            background: rgba(239, 68, 68, 0.2);
             color: var(--error);
         }
         
@@ -451,7 +455,7 @@
             font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
             font-size: 0.75rem;
             color: var(--text-secondary);
-            background: var(--bg-primary);
+            background: #0f0f0f;
         }
         
         @media (max-width: 768px) {
@@ -501,7 +505,7 @@
             display: none;
         }
 
-        /* Light scrollbar */
+        /* Dark scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -517,7 +521,7 @@
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-muted);
+            background: var(--accent);
         }
     </style>
 </head>
