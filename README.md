@@ -1,4 +1,3 @@
-
 # Dbify
 
 <img width="1861" height="916" alt="image" src="https://github.com/user-attachments/assets/3188d43f-823a-4c04-8e25-2edad4ba235a" />
@@ -45,8 +44,7 @@ Dbify is a platform that allows users to instantly generate CRUD APIs on top of 
 
 ## 📐 Architecture
 
-Below is the high-level system architecture of Dbify:
-<img width="1861" height="916" alt="image" src="https://github.com/user-attachments/assets/3188d43f-823a-4c04-8e25-2edad4ba235a" />
+Below is the high-level system architecture of Dbify: <img width="1861" height="916" alt="image" src="https://github.com/user-attachments/assets/3188d43f-823a-4c04-8e25-2edad4ba235a" />
 
 ### Flow
 
@@ -97,13 +95,136 @@ Below is the high-level system architecture of Dbify:
 * **Email Notifications**: SES / Sendgrid
 
 ---
+
+## 🚀 Quick Start
+
+1. **Provide your PostgreSQL URL**
+   Example:
+
+   ```
+   postgres://username:password@host:5432/mydb
+   ```
+
+2. **Dbify gives you**:
+
+   * `projectId`
+   * `apiKey`
+   * Ready-to-use endpoints for all tables in your DB.
+
 ---
 
-## 🔮 Roadmap
+## 📘 Example API Usage
 
-* [ ] OAuth & JWT authentication for APIs.
-* [ ] Role-based access control (RBAC).
-* [ ] Multi-tenant support.
-* [ ] SDKs for JavaScript, Python, and Go.
-* [ ] Webhooks for real-time notifications.
-* [ ] 
+### Read Operation
+
+```json
+{
+  "projectId": 4,
+  "apiKey": "4148f85d8ae6a3914f",
+  "operation": "read",
+  "payload": {
+    "id": 3
+  },
+  "tableName": "Project"
+}
+```
+
+### Update Operation
+
+```json
+{
+  "projectId": 4,
+  "apiKey": "4148f85d8ae6a3914f",
+  "operation": "update",
+  "payload": {
+    "where": { "email": "test" },
+    "data": {
+      "email": "test@gmail",
+      "password": "test",
+      "name": "test@new"
+    }
+  },
+  "tableName": "User"
+}
+```
+
+### Create Operation
+
+```json
+{
+  "projectId": 4,
+  "apiKey": "4148f85d8ae6a3914f",
+  "operation": "create",
+  "payload": {
+    "data": {
+      "title": "New Project",
+      "description": "This is a new project"
+    }
+  },
+  "tableName": "Project"
+}
+```
+
+### Delete Operation
+
+```json
+{
+  "projectId": 4,
+  "apiKey": "4148f85d8ae6a3914f",
+  "operation": "delete",
+  "payload": {
+    "where": { "id": 3 }
+  },
+  "tableName": "Project"
+}
+```
+
+---
+
+## 🌐 Example cURL Requests
+
+### Read Example
+
+```bash
+curl -X POST https://api.dbify.com/query \
+  -H "Content-Type: application/json" \
+  -d '{
+    "projectId": 4,
+    "apiKey": "4148f85d8ae6a3914f",
+    "operation": "read",
+    "payload": { "id": 3 },
+    "tableName": "Project"
+  }'
+```
+
+### Create Example
+
+```bash
+curl -X POST https://api.dbify.com/query \
+  -H "Content-Type: application/json" \
+  -d '{
+    "projectId": 4,
+    "apiKey": "4148f85d8ae6a3914f",
+    "operation": "create",
+    "payload": { "data": { "title": "New Project" } },
+    "tableName": "Project"
+  }'
+```
+
+---
+
+## 📖 Documentation
+
+* **Authentication**: Every request must include `projectId` and `apiKey`.
+* **Supported Operations**: `create`, `read`, `update`, `delete`.
+* **Error Handling**: Returns structured JSON with `errorCode`, `message`, and `details`.
+* **Schema Sync**: Automatically detects schema changes and updates endpoints accordingly.
+
+---
+
+## ✅ Best Practices
+
+* Rotate your `apiKey` regularly.
+* Use role-based access (upcoming feature) for fine-grained control.
+* Monitor schema change logs in the dashboard.
+* Combine with Elasticsearch/Vector DB integration for advanced search features.
