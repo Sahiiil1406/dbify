@@ -1,7 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const {setKey,getKey,delKey}=require('../config/redis');
-const { getDbConnection,extractDatabaseSchema}=require('../config/connection-management');
+const { getDbConnection,extractDatabaseSchema}=require('../config/connection-management.js');
 
 const initialiseProject=async(req,res)=>{
   try {
