@@ -229,9 +229,34 @@ curl -X POST https://api.dbify.com/query \
 
 ---
 
-## ✅ Best Practices
+## ✅ Next Features
 
-* Rotate your `apiKey` regularly.
-* Use role-based access (upcoming feature) for fine-grained control.
-* Monitor schema change logs in the dashboard.
-* Combine with Elasticsearch/Vector DB integration for advanced search features.
+## 📌 Feature Priorities (High → Low)
+
+### 1. Convex → Real-Time Dashboard Updates
+- Live API usage stats (total requests, response times).
+- Instant schema change notifications.
+- Real-time collaborative dashboard for monitoring.
+
+### 2. Better-Auth → Role-Based Access Control (RBAC)
+- Fine-grained access for team collaboration.
+- Roles: Admin, Developer, Viewer.
+- Secures APIs with identity providers (Google, GitHub, etc.).
+
+### 3.  Firecrawl → Docs Scraping for Chatbot Context
+- Scrapes external developer docs.
+- Provides contextual grounding for an in-app chatbot.
+- Helps users navigate Dbify features and troubleshoot with AI assistance.
+
+
+### 4. Scorecard → API Performance Monitoring
+- Tracks latency, error rates, and uptime of generated APIs.
+- Provides a **Dbify Health Score** to measure project reliability.
+
+### 5. Inkeep → AI-Powered Documentation + Search
+- Auto-generated, interactive API docs for each project.
+- Smart semantic search in docs so developers can instantly find usage examples.
+
+### 6. Vapi + Resend → Voice-Triggered API + Email Confirmation
+- Voice assistant to trigger CRUD operations on Dbify.
+- Confirmation and result sent instantly via email.
