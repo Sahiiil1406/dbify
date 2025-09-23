@@ -13,8 +13,9 @@ const mainDBFunc=async(req,res)=>{
     if(project.apiKey !== apiKey) return res.status(403).json({ error: 'Access denied' });
     //console.log(project);
     const dbUrl=project.dbUrl;
-    const db= getDbConnection(dbUrl);
+    const db=await getDbConnection(dbUrl);
     let schema=await getKey(`project:${project.dbUrl}`);
+    //console.log("Fetched schema from Redis:", schema);
     if(!schema){
         schema=await extractDatabaseSchema(db);
         await setKey(`project:${project.dbUrl}`, schema);

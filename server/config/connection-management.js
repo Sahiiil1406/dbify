@@ -1,27 +1,71 @@
-const knex = require('knex');
+const knex = require("knex");
+const { Client } = require("pg");
+const { connectRedis, setKey, getKey, delKey } = require("./redis");
 
 const connections = {};
+async function setupTriggers(pgClient) {
+  await pgClient.query(`
+    DO $$
+    BEGIN
+      IF NOT EXISTS (
+        SELECT 1 FROM pg_event_trigger WHERE evtname = 'schema_change_trigger'
+      ) THEN
+        CREATE FUNCTION notify_db_change()
+        RETURNS event_trigger
+        LANGUAGE plpgsql
+        AS $fn$
+        BEGIN
+          PERFORM pg_notify('db_change', 'schema_changed');
+        END;
+        $fn$;
 
-const getDbConnection = (connectionUrl) => {
-  console.log("Connecting to DB:", connectionUrl);
+        CREATE EVENT TRIGGER schema_change_trigger
+        ON ddl_command_end
+        EXECUTE FUNCTION notify_db_change();
+      END IF;
+    END
+    $$ LANGUAGE plpgsql;
+  `);
+}
+
+const getDbConnection = async (connectionUrl) => {
   if (connections[connectionUrl]) {
-    console.log(connections[connectionUrl]);
-    return connections[connectionUrl];
+    console.log("Using cached connection:", connectionUrl);
+    return connections[connectionUrl].knex;
   }
+
   try {
     const dbInstance = knex({
-      client: 'pg',
+      client: "pg",
       connection: connectionUrl,
-      pool: {
-        min: 0,
-        max: 10
+      pool: { min: 0, max: 10 },
+    });
+
+    // 2. Dedicated pg.Client for LISTEN/NOTIFY
+    const pgClient = new Client({ connectionString: connectionUrl });
+    await pgClient.connect();
+
+    // Setup triggers
+    await setupTriggers(pgClient);
+
+    // Listen for notifications
+    pgClient.on("notification", async (msg) => {
+      if (msg.channel === "db_change") {
+        const schema = await extractDatabaseSchema(dbInstance);
+        await setKey(`project:${connectionUrl}`, JSON.stringify(schema));
+        console.log(`Database schema for ${connectionUrl} updated in Redis`);
       }
     });
-    connections[connectionUrl] = dbInstance;
-    console.log('Database connection established');
+    await pgClient.query("LISTEN db_change");
+
+    // Cache both
+    connections[connectionUrl] = { knex: dbInstance, listener: pgClient };
+
+    console.log("New DB connection established and listening for changes.");
+
     return dbInstance;
   } catch (error) {
-    console.error('Failed to create database connection:', error);
+    console.error("Failed to create database connection:", error);
     throw error;
   }
 };
@@ -36,12 +80,13 @@ const extractDatabaseSchema = async (db) => {
       ORDER BY table_name;
     `);
 
-    const tables = tablesResult.rows.map(row => row.table_name);
-    
+    const tables = tablesResult.rows.map((row) => row.table_name);
+
     const schema = {};
-    
+
     for (const tableName of tables) {
-      const columnsResult = await db.raw(`
+      const columnsResult = await db.raw(
+        `
         SELECT 
           c.column_name,
           c.data_type,
@@ -83,17 +128,21 @@ const extractDatabaseSchema = async (db) => {
         ) fk ON c.column_name = fk.column_name AND c.table_name = fk.table_name
         WHERE c.table_name = ?
         ORDER BY c.ordinal_position;
-      `, [tableName]);
+      `,
+        [tableName]
+      );
 
       const columns = columnsResult.rows;
-      const primaryKeys = columns.filter(col => col.is_primary_key).map(col => col.column_name);
-      
+      const primaryKeys = columns
+        .filter((col) => col.is_primary_key)
+        .map((col) => col.column_name);
+
       schema[tableName] = {
         tableName,
-        columns: columns.map(col => ({
+        columns: columns.map((col) => ({
           name: col.column_name,
           dataType: col.data_type,
-          isNullable: col.is_nullable === 'YES',
+          isNullable: col.is_nullable === "YES",
           defaultValue: col.column_default,
           maxLength: col.character_maximum_length,
           precision: col.numeric_precision,
@@ -101,27 +150,24 @@ const extractDatabaseSchema = async (db) => {
           isPrimaryKey: col.is_primary_key,
           isForeignKey: col.is_foreign_key,
           foreignTable: col.foreign_table_name,
-          foreignColumn: col.foreign_column_name
+          foreignColumn: col.foreign_column_name,
         })),
-        primaryKeys
+        primaryKeys,
       };
     }
 
     return {
       tables,
       schema,
-      tableCount: tables.length
+      tableCount: tables.length,
     };
-
   } catch (error) {
-    console.error('Error extracting database schema:', error);
+    console.error("Error extracting database schema:", error);
     throw error;
   }
 };
 
-
-
 module.exports = {
   getDbConnection,
-  extractDatabaseSchema
+  extractDatabaseSchema,
 };
