@@ -9,6 +9,7 @@ const userRoutes = require('./routes/user.routes.js');
 const projectRoutes = require('./routes/project.routes.js');
 const crudRoutes = require('./routes/crud.routes.js');
 const docsRoutes = require('./routes/docs.routes.js');
+const loggerMiddleware = require('./middleware/logger.middleware.js');
 const prisma = new PrismaClient();
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(cookieParser());
+app.use(loggerMiddleware);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ 

@@ -61,7 +61,7 @@ const getDbConnection = async (connectionUrl) => {
     // Cache both
     connections[connectionUrl] = { knex: dbInstance, listener: pgClient };
 
-    console.log("New DB connection established and listening for changes.");
+    //console.log("New DB connection established and listening for changes.");
 
     return dbInstance;
   } catch (error) {
