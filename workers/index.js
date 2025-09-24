@@ -1,10 +1,13 @@
-const express = require('express');
-const amqp = require('amqplib');
-require('dotenv').config();
+// Convert your code to ES6 imports
+import express from 'express';
+import amqp from 'amqplib';
+import 'dotenv/config';
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "./convex/_generated/api.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+const convex = new ConvexHttpClient(process.env.CONVEX_URL);
 const RABBITMQ_URL = process.env.RABBITMQ_URL || 'amqp://user:password@localhost:5672/'
 const QUEUE_NAME = process.env.RABBITMQ_TASK_QUEUE || 'task_queue'
 const EXCHANGE = process.env.RABBITMQ_TASK_QUEUE || 'task_queue'
@@ -23,10 +26,14 @@ const runWorker = async () => {
 
     channel.consume(
       QUEUE_NAME,
-      (msg) => {
+      async(msg) => {
         if (msg !== null) {
           const content = msg.content.toString();
-          console.log('📥 Received message:', content);
+          // console.log('📥 Received message:', content);
+          const logData = JSON.parse(content);
+          // storeLog(logData).catch(err => console.error('❌ Failed to store log:', err));
+          // Acknowledge message after processing
+          await convex.mutation(api.mutations.storeLog, logData).catch(err => console.error('❌ Failed to store log:', err));
           channel.ack(msg);
         }
       },
