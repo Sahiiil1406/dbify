@@ -43,7 +43,7 @@ const pushToTaskQueue = async (message) => {
 
 
   channel.sendToQueue(TASK_QUEUE, Buffer.from(JSON.stringify(message)), { persistent: true });
-  console.log('📤 Message sent to task queue:', message);
+  //console.log('📤 Message sent to task queue:', message);
 };
 
 module.exports = {
