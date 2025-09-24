@@ -1,122 +1,143 @@
 # Dbify
 
-<img width="1861" height="916" alt="image" src="https://github.com/user-attachments/assets/3188d43f-823a-4c04-8e25-2edad4ba235a" />
+Dbify is a unified platform that instantly generates secure, production-ready APIs on top of any database—whether it’s SQL (PostgreSQL, MySQL), NoSQL (MongoDB, Cassandra), reactive (Convex), graph (Neo4j), or vector (Pinecone, Weaviate)—by abstracting away complexity and exposing feature-rich, auto-scaled APIs without the need for schema migrations or data replication.
 
-Dbify is a platform that allows users to instantly generate CRUD APIs on top of their existing PostgreSQL databases. Users simply provide their PostgreSQL connection URL, and Dbify handles the rest by exposing secure, scalable, and feature-rich APIs without requiring schema migrations or data replication.
+✅ **Your data, your control** – Dbify never replicates or moves your data, ensuring zero vendor lock-in.
 
 ---
 
 ## 🚀 Features
 
-* **Instant CRUD API**: Generate full CRUD APIs for your PostgreSQL database by just providing the DB connection URL.
-* **User Dashboard**:
+### 🔹 Instant CRUD API
 
-  * View project details, API keys, and activity logs.
-  * Logs of all API calls with:
+* Generate full CRUD APIs by simply providing a DB connection URL.
+* Endpoints auto-generated for every table/collection.
 
-    * Total number of requests
-    * Average response time
-    * Request timestamps
-    * Schema change logs
-  * Proper UI/UX with a graphical interface.
-* **Schema Change Detection**:
+### 🔹 User Dashboard
 
-  * Triggers events when schema structure changes.
-  * Notifies users via email.
-  * Updates cache automatically for faster operations.
-* **Scalable & Performant**:
+* View project details, API keys, and activity logs.
+* Logs include:
 
-  * Uses PgBouncer for efficient connection pooling and horizontal scaling.
-  * Queue + Workers architecture for log handling and analytics.
-  * Data saved into time-series DB (Clickhouse) for fast analytics.
-* **Enhanced Search & Queries**:
+  * Total requests
+  * Avg response time
+  * Request timestamps
+  * Schema change history
+* Modern UI/UX with real-time graphical analytics.
 
-  * Support for specific query-based APIs.
-  * Integration with **Elasticsearch** for full-text search.
-  * Integration with **Vector DBs** for semantic search.
-* **Developer Friendly**:
+### 🔹 Schema Change Detection
 
-  * API linter setup.
-  * Built-in API documentation.
-  * Support for cron operations.
+* Auto-detects schema changes in your DB.
+* Triggers events + sends email alerts.
+* Updates in-memory cache instantly for faster API responses.
 
-   <img width="1854" height="936" alt="image" src="https://github.com/user-attachments/assets/a61b8bc1-f568-453b-ae06-bb8852ab6fa4" />
-   <img width="1552" height="822" alt="image" src="https://github.com/user-attachments/assets/223e953b-a000-4d48-b28b-aaf18e21112a" />
-   <img width="1538" height="939" alt="image" src="https://github.com/user-attachments/assets/496b53e7-6f19-4989-b9d6-4d456e7968b0" />
+### 🔹 Scalability & Performance
+
+* **PgBouncer** for efficient connection pooling & horizontal scaling.
+* **Queue + Workers** for async log handling & analytics.
+* **ClickHouse** for time-series API analytics (blazing fast).
+
+### 🔹 Enhanced Queries & Search
+
+* SQL + NoSQL query builder APIs.
+* **Elasticsearch** integration for full-text search.
+* **Vector DB** integration for semantic search.
+
+### 🔹 Enterprise Authentication (Better-Auth)
+
+*  Social sign-on (Google, GitHub, Discord, Twitter)
+*  Role-Based Access Control (Admin, Developer, Viewer)
 
 
+### 🔹 Notifications (Resend)
 
+* Schema change alerts via email.
+* Usage spike notifications.
+* Team invites & collaboration updates.
+
+### 🔹 Developer Friendly
+
+* Built-in API documentation.
+* API linter for consistent design.
+* Cron job support for scheduled operations.
+* AI-powered assistant (trained on Postgres, React, & your schema).
 
 ---
 
-## 📐 Architecture
+## 📐 System Architecture
 
-Below is the high-level system architecture of Dbify: <img width="1861" height="916" alt="image" src="https://github.com/user-attachments/assets/3188d43f-823a-4c04-8e25-2edad4ba235a" />
+<img width="1861" height="916" alt="image" src="https://github.com/user-attachments/assets/3188d43f-823a-4c04-8e25-2edad4ba235a" />
 
-### Flow
+### High-Level Flow
 
-1. **Users** provide their PostgreSQL DB URL to the **Server**.
+1. **Users** provide their database connection details → **Dbify Server**.
 2. **Server**:
 
-   * Stores DB URL in Dbify’s database.
-   * Returns `apiKey` and `projectId`.
-   * Caches user tables for faster access.
-   * Updates cache when schema changes are detected.
+   * Validates & securely stores connection details.
+   * Returns `apiKey` + `projectId`.
+   * Introspects and caches schema.
+   * Continuously monitors for schema changes.
 3. **Schema Changes**:
 
-   * Trigger events when schema structure is modified.
-   * Notify users via **Email**.
-4. **Logs**:
+   * Trigger events + notify users via email.
+   * Auto-update cached schema.
+4. **Logs & Analytics**:
 
-   * API request logs are pushed into a **Message Queue**.
-   * **Workers** consume logs and store them in **ClickhouseDB** for analytics.
-5. **User Dashboard**:
+   * API logs pushed into **Message Queue**.
+   * **Workers** process logs → store in **ClickHouse**.
+   * Provide database-specific performance metrics.
+5. **Dashboard**:
 
-   * Displays logs, usage stats, API keys, and schema change history.
-   * Provides graphical analytics powered by Clickhouse.
+   * Live API usage stats via **Convex**.
+   * Real-time schema change notifications.
+   * Collaborative monitoring & analytics.
 
----
+### Subsystems
 
-## 🛠️ Notes & Recommendations
+* **Authentication System (Better-Auth)**:
 
-* Use **PgBouncer** for better pool connection management and efficient horizontal scaling.
-* Implement **API linter** to enforce consistency.
-* Add **cron job support** for scheduled operations.
-* Provide **in-built API documentation** for developers.
-* Extend integrations with:
+  * Social login support
+  * RBAC + Secure API key management
+* **Notification System (Resend)**:
 
-  * **Elasticsearch** for full-text search.
-  * **Vector DBs** for semantic search.
+  * Email alerts, reports, team invites
+* **Analytics Pipeline**:
+
+  * Real-time logging via Convex
+  * Workers → ClickHouse for querying
+* **Cache & Scaling**:
+
+  * Redis for hot data
+  * PgBouncer for pooling
 
 ---
 
 ## 📊 Tech Stack
 
-* **Backend**: Node.js / Express (with PostgreSQL driver)
-* **Database**: PostgreSQL (user DB), Clickhouse (analytics)
-* **Queue**: Kafka / RabbitMQ
-* **Workers**: Node.js / Go-based workers for async tasks
+* **Backend**: Node.js / Express
+* **Primary DB**: PostgreSQL (user DB)
+* **Analytics**: Convex 
+* **Queue**: RabbitMQ
+* **Workers**: Node.js
 * **Search**: Elasticsearch, Vector DBs
-* **Connection Management**: PgBouncer
 * **Cache**: Redis
-* **Email Notifications**: SES / Sendgrid
+* **Connection Management**: PgBouncer
+* **Notifications**: ReSend
+* **Auth**: Better-Auth
 
 ---
 
 ## 🚀 Quick Start
 
-1. **Provide your PostgreSQL URL**
-   Example:
+1. **Provide your DB connection URL**
 
    ```
    postgres://username:password@host:5432/mydb
    ```
-
 2. **Dbify gives you**:
 
    * `projectId`
    * `apiKey`
-   * Ready-to-use endpoints for all tables in your DB.
+   * Auto-generated CRUD endpoints for your DB tables
 
 ---
 
@@ -129,9 +150,7 @@ Below is the high-level system architecture of Dbify: <img width="1861" height="
   "projectId": 4,
   "apiKey": "4148f85d8ae6a3914f",
   "operation": "read",
-  "payload": {
-    "id": 3
-  },
+  "payload": { "id": 3 },
   "tableName": "Project"
 }
 ```
@@ -145,11 +164,7 @@ Below is the high-level system architecture of Dbify: <img width="1861" height="
   "operation": "update",
   "payload": {
     "where": { "email": "test" },
-    "data": {
-      "email": "test@gmail",
-      "password": "test",
-      "name": "test@new"
-    }
+    "data": { "email": "test@gmail", "password": "test", "name": "test@new" }
   },
   "tableName": "User"
 }
@@ -162,12 +177,7 @@ Below is the high-level system architecture of Dbify: <img width="1861" height="
   "projectId": 4,
   "apiKey": "4148f85d8ae6a3914f",
   "operation": "create",
-  "payload": {
-    "data": {
-      "title": "New Project",
-      "description": "This is a new project"
-    }
-  },
+  "payload": { "data": { "title": "New Project", "description": "This is a new project" } },
   "tableName": "Project"
 }
 ```
@@ -179,18 +189,14 @@ Below is the high-level system architecture of Dbify: <img width="1861" height="
   "projectId": 4,
   "apiKey": "4148f85d8ae6a3914f",
   "operation": "delete",
-  "payload": {
-    "where": { "id": 3 }
-  },
+  "payload": { "where": { "id": 3 } },
   "tableName": "Project"
 }
 ```
 
 ---
 
-## 🌐 Example cURL Requests
-
-### Read Example
+## 🌐 Example cURL
 
 ```bash
 curl -X POST https://api.dbify.com/query \
@@ -204,59 +210,50 @@ curl -X POST https://api.dbify.com/query \
   }'
 ```
 
-### Create Example
-
-```bash
-curl -X POST https://api.dbify.com/query \
-  -H "Content-Type: application/json" \
-  -d '{
-    "projectId": 4,
-    "apiKey": "4148f85d8ae6a3914f",
-    "operation": "create",
-    "payload": { "data": { "title": "New Project" } },
-    "tableName": "Project"
-  }'
-```
-
 ---
 
 ## 📖 Documentation
+   <img width="1854" height="936" alt="image" src="https://github.com/user-attachments/assets/a61b8bc1-f568-453b-ae06-bb8852ab6fa4" />
+   <img width="1552" height="822" alt="image" src="https://github.com/user-attachments/assets/223e953b-a000-4d48-b28b-aaf18e21112a" />
+   <img width="1538" height="939" alt="image" src="https://github.com/user-attachments/assets/496b53e7-6f19-4989-b9d6-4d456e7968b0" />
 
-* **Authentication**: Every request must include `projectId` and `apiKey`.
-* **Supported Operations**: `create`, `read`, `update`, `delete`.
-* **Error Handling**: Returns structured JSON with `errorCode`, `message`, and `details`.
-* **Schema Sync**: Automatically detects schema changes and updates endpoints accordingly.
+* **Authentication**: Every request must include `projectId` + `apiKey`.
+* **Operations**: `create`, `read`, `update`, `delete`.
+* **Error Handling**: Structured JSON with `errorCode`, `message`, and `details`.
+* **Schema Sync**: Endpoints auto-sync on schema changes.
 
 ---
 
-## ✅ Next Features
+## ✅ Roadmap / Next Features
 
-## 📌 Feature Priorities (High → Low)
+### 1. Convex → Real-Time Dashboard(Done)
 
-### 1. Convex → Real-Time Dashboard Updates
-- Live API usage stats (total requests, response times).
-- Instant schema change notifications.
-- Real-time collaborative dashboard for monitoring.
+* Live usage stats (req count, response times)
+* Instant schema change notifications
+* Collaborative dashboards
 
-### 2. Better-Auth → Role-Based Access Control (RBAC)
-- Fine-grained access for team collaboration.
-- Roles: Admin, Developer, Viewer.
-- Secures APIs with identity providers (Google, GitHub, etc.).
+### 2. Better-Auth → Advanced RBAC
 
-### 3.  Firecrawl → Docs Scraping for Chatbot Context
-- Scrapes external developer docs.
-- Provides contextual grounding for an in-app chatbot.
-- Helps users navigate Dbify features and troubleshoot with AI assistance.
+* Team roles: Admin, Developer, Viewer
+* OAuth provider integrations (Google, GitHub, Discord, Twitter)
+* Granular API key permissions
 
+### 3. Firecrawl → Docs Scraping
 
-### 4. Scorecard → API Performance Monitoring
-- Tracks latency, error rates, and uptime of generated APIs.
-- Provides a **Dbify Health Score** to measure project reliability.
+* Scrape external docs for chatbot grounding
+* AI-driven contextual assistant
 
-### 5. Inkeep → AI-Powered Documentation + Search
-- Auto-generated, interactive API docs for each project.
-- Smart semantic search in docs so developers can instantly find usage examples.
+### 4. Scorecard → API Monitoring
 
-### 6. Vapi + Resend → Voice-Triggered API + Email Confirmation
-- Voice assistant to trigger CRUD operations on Dbify.
-- Confirmation and result sent instantly via email.
+* Latency, error rate, uptime
+* Project reliability via **Dbify Health Score**
+
+### 5. Inkeep → AI Docs + Smart Search
+
+* Auto-generated interactive API docs
+* Semantic search for instant examples
+
+### 6. Vapi + Resend → Voice + Email APIs
+
+* Voice-triggered CRUD operations
+* Email confirmation with results
