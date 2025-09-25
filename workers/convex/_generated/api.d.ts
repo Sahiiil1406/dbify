@@ -14,6 +14,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as mutations from "../mutations.js";
+import type * as task from "../task.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -25,6 +26,7 @@ import type * as mutations from "../mutations.js";
  */
 declare const fullApi: ApiFromModules<{
   mutations: typeof mutations;
+  task: typeof task;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,

@@ -6,10 +6,11 @@ const {initialiseProject,stopProject
 const { authenticateToken }=require('../middleware/user.middleware.js');
 
 router.post('/', authenticateToken, createProject);
+router.get('/', authenticateToken, getMyProjects);
 router.put('/:id', authenticateToken, updateProject);
 router.delete('/:id', authenticateToken, deleteProject);
 router.get('/:id', authenticateToken, getProject);
-router.get('/', authenticateToken, getMyProjects);
+
 
 router.post('/initialise/:id', authenticateToken, initialiseProject);
 router.post('/stop/:id', authenticateToken, stopProject);

@@ -1,6 +1,7 @@
 const { pushToTaskQueue } = require("../config/taskQueue");
 
 const loggerMiddleware = (req, res, next) => {
+    console.log(req.method,"     ",req.path)
     if (req.path !== "/api/crud") {
         return next(); // Skip logging for other endpoints
     }
