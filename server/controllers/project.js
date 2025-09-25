@@ -9,7 +9,8 @@ const createProject = async (req, res) => {
   const { title, description, dbUrl, dbType } = req.body;
 
   const apiKey = generateApiKey();
-  //console.log(req.user)
+  console.log(req.user)
+  console.log(req.body)
   try {
     const project = await prisma.project.create({
       data: {
@@ -83,10 +84,12 @@ const getMyProjects = async (req, res) => {
   const userId = req.user.id;
 
   try {
+    console.log(userId);
     const projects = await prisma.project.findMany({
       where: { userId },
       orderBy: { createdAt: "desc" }, // optional: newest first
     });
+    console.log(projects);
     res.status(200).json(projects);
   } catch (error) {
     console.error(error);

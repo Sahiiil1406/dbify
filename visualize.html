@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dbify Schema Visualizer</title>
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
+    #network { width: 100%; height: 100vh; border: 1px solid lightgray; }
+    #loading {
+      position: absolute;
+      top: 10px; left: 10px;
+      background: #fff;
+      padding: 5px 10px;
+      border: 1px solid #1976d2;
+      border-radius: 4px;
+      font-weight: bold;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+<div id="loading">Loading schema...</div>
+<div id="network"></div>
+
+<script>
+const projectId = 4;
+const loadingDiv = document.getElementById('loading');
+const container = document.getElementById('network');
+
+const fetchSchema = async () => {
+  try {
+    const res = await fetch('http://localhost:5000/api/docs/visualize', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ projectId })
+    });
+    if (!res.ok) throw new Error('Failed to fetch schema');
+    const data = await res.json();
+
+    const nodes = new vis.DataSet(data.nodes.map(n => ({
+      id: n.data.id,
+      label: n.data.label,
+      color: n.data.id.startsWith('_') ? '#757575' : '#1976d2',
+      font: { color: '#fff' },
+      shape: 'box'
+    })));
+
+    const edges = new vis.DataSet(data.edges.map(e => ({
+      id: e.data.id,
+      from: e.data.source,
+      to: e.data.target,
+      label: e.data.label,
+      arrows: 'to',
+      color: { color: '#ff9800' },
+      font: { align: 'middle' }
+    })));
+
+    const network = new vis.Network(container, { nodes, edges }, {
+      layout: { hierarchical: false },
+      physics: {
+        enabled: true,
+        barnesHut: { gravitationalConstant: -30000, springLength: 150, springConstant: 0.01 },
+      },
+      interaction: { hover: true, multiselect: true }
+    });
+
+    loadingDiv.style.display = 'none';
+
+    // Tooltip on hover
+    network.on("hoverNode", function(params) {
+      const node = nodes.get(params.node);
+      container.title = node.label;
+    });
+    network.on("blurNode", function() { container.title = ''; });
+
+  } catch (err) {
+    console.error(err);
+    loadingDiv.textContent = 'Error loading schema';
+  }
+};
+
+fetchSchema();
+</script>
+
+</body>
+</html>

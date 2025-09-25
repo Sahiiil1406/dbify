@@ -20,7 +20,7 @@ const mainDBFunc=async(req,res)=>{
         schema=await extractDatabaseSchema(db);
         await setKey(`project:${project.dbUrl}`, schema);
     }
-    console.log(schema);
+    // console.log(...schema);
     const CRUD=new DatabaseCRUD(db,schema);
     // console.log(CRUD)
     if(operation==='create'){

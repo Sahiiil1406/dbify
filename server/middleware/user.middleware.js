@@ -4,6 +4,7 @@ const jwt=require('jsonwebtoken');
 const authenticateToken=(req,res,next)=>{
     const token=req.cookies.token || req.headers['authorization']?.split(' ')[1];
     if(!token){
+        console.log('No token provided');
         return res.status(401).send({
             msg:'No token provided',    
             error: 'Unauthorized'

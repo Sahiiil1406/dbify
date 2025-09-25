@@ -13,6 +13,7 @@
   "dependencies": {
     "amqplib": "^0.10.9",
     "convex": "^1.27.3",
+    "convex-helpers": "^0.1.104",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0"
