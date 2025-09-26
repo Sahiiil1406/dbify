@@ -9,6 +9,8 @@ import SignupPage from './pages/Signup.jsx';
 import ProjectsDashboard from './pages/Dashboard.jsx';
 import Project from './pages/Project.jsx';
 import { ConvexProvider, ConvexReactClient } from "convex/react";
+import DocsPage from './pages/Docs.jsx';
+import Visualize from './pages/Visualize.jsx';
 
 const convex = new ConvexReactClient("https://academic-albatross-125.convex.cloud")
 const router = createBrowserRouter([
@@ -29,6 +31,12 @@ const router = createBrowserRouter([
   },{
     path:'/project/:projectId',
     element: <Project />,
+  },{
+    path:'/docs/:projectId',
+    element: <DocsPage />,
+  },{
+    path:'/visualize/:projectId',
+    element: <Visualize />,
   }
 ]);
 

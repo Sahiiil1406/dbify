@@ -81,10 +81,9 @@ const getProject = async (req, res) => {
 };
 
 const getMyProjects = async (req, res) => {
-  const userId = req.user.id;
-
+  const userId = req.user.userId;
   try {
-    console.log(userId);
+    //console.log(req.user);
     const projects = await prisma.project.findMany({
       where: { userId },
       orderBy: { createdAt: "desc" }, // optional: newest first
