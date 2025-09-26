@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>NL → SQL Assistant</title>
+  <style>
+    body { font-family: system-ui, Arial; max-width: 900px; margin: 28px auto; padding: 0 16px; }
+    textarea { width:100%; height:120px; margin-bottom: 8px; }
+    pre { background:#f6f8fa; padding:12px; border-radius:6px; overflow:auto; }
+    .muted { color:#666; font-size:0.9rem; }
+    button { padding:8px 12px; margin-right:8px; }
+  </style>
+</head>
+<body>
+  <h2>Natural Language → SQL Assistant</h2>
+  <p class="muted">
+    Type an English instruction and click <strong>Propose SQL</strong>.  
+    Review the generated SQL statement and click <strong>Confirm & Execute</strong> to run it.
+  </p>
+
+  <textarea id="nl" placeholder="E.g. Show me the 5 most recent customers with their email and signup date"></textarea>
+  <br/>
+  <label>
+    API Key: <input id="apikey" value="dev-key" style="width:240px" />
+  </label>
+  <br/><br/>
+  <button id="propose">Propose SQL</button>
+  <button id="execute" disabled>Confirm & Execute</button>
+  <button id="clear">Clear</button>
+
+  <h3>Proposed SQL</h3>
+  <pre id="sql">No SQL proposed yet</pre>
+
+  <h3>Result</h3>
+  <pre id="result">No action yet</pre>
+
+  <script>
+    const nlEl = document.getElementById('nl');
+    const sqlEl = document.getElementById('sql');
+    const outEl = document.getElementById('result');
+    const keyEl = document.getElementById('apikey');
+    const proposeBtn = document.getElementById('propose');
+    const executeBtn = document.getElementById('execute');
+    const clearBtn = document.getElementById('clear');
+
+    // Base URL of your Inkeep AgentGraph server
+    const BASE_URL = 'http://localhost:3002';
+    const SUGGEST_TOOL = 'suggest-sql';
+    const EXECUTE_TOOL = 'execute-sql';
+
+    async function runTool(toolId, args) {
+      const resp = await fetch(`${BASE_URL}/tools/${toolId}/run`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-api-key': keyEl.value },
+        body: JSON.stringify(args)
+      });
+      const j = await resp.json();
+      if (!resp.ok || !j.success) throw new Error(j.error || 'Unknown error');
+      return j.output;
+    }
+
+    // Propose SQL
+    proposeBtn.addEventListener('click', async () => {
+      const prompt = nlEl.value.trim();
+      if (!prompt) return alert('Type a natural-language instruction first.');
+      sqlEl.textContent = 'Generating SQL...';
+      outEl.textContent = '';
+      executeBtn.disabled = true;
+
+      try {
+        const output = await runTool(SUGGEST_TOOL, { prompt });
+        sqlEl.textContent = output.sql || 'No SQL returned';
+        executeBtn.disabled = !!output.sql;
+      } catch (err) {
+        sqlEl.textContent = 'Error: ' + err.message;
+      }
+    });
+
+    // Execute SQL
+    executeBtn.addEventListener('click', async () => {
+      const sql = sqlEl.textContent.trim();
+      if (!sql || sql.startsWith('No SQL')) return alert('No SQL to execute. Propose first.');
+      if (!confirm('Are you sure you want to execute this SQL?\n\n' + sql)) return;
+
+      outEl.textContent = 'Executing...';
+      try {
+        const output = await runTool(EXECUTE_TOOL, { sql });
+        outEl.textContent = 'Success:\n' + JSON.stringify(output, null, 2);
+        executeBtn.disabled = true;
+      } catch (err) {
+        outEl.textContent = 'Error: ' + err.message;
+      }
+    });
+
+    // Reset
+    clearBtn.addEventListener('click', () => {
+      nlEl.value = '';
+      sqlEl.textContent = 'No SQL proposed yet';
+      outEl.textContent = 'No action yet';
+      executeBtn.disabled = true;
+    });
+  </script>
+</body>
+</html>

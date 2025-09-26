@@ -11,7 +11,7 @@ import Project from './pages/Project.jsx';
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import DocsPage from './pages/Docs.jsx';
 import Visualize from './pages/Visualize.jsx';
-
+import ChatInterface from './pages/AI.jsx';
 const convex = new ConvexReactClient("https://academic-albatross-125.convex.cloud")
 const router = createBrowserRouter([
   {
@@ -37,6 +37,9 @@ const router = createBrowserRouter([
   },{
     path:'/visualize/:projectId',
     element: <Visualize />,
+  },{
+    path:'/ai',
+    element: <ChatInterface />,
   }
 ]);
 
