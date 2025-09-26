@@ -48,7 +48,10 @@ const generateCytoscapeElements = (schema) => {
 
 const visualizeSchema = async (req, res) => {
   try {
-    const { projectId } = req.body;
+    const { projectId } = req.params;
+    if (!projectId) {
+      return res.status(400).json({ error: "Project ID is required" });
+    }
     //console.log("Visualizing schema for projectId:", projectId);
     const project = await prisma.project.findUnique({
       where: { id: Number(projectId) },

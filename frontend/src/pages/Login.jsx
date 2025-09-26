@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Eye, EyeOff, Mail, Lock, User, Chrome, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, Chrome, Loader2 } from 'lucide-react';
 import axios from 'axios';
 
 const LoginPage = () => {
@@ -20,42 +20,36 @@ const LoginPage = () => {
   });
 
   // Get backend URL from environment variable
- const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
-const handleLoginSubmit = async (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     setSuccess('');
-  try {
-    console.log(loginData);
-    const response = await axios.post(
-      `${BACKEND_URL}/api/users/signin`,
-      loginData,{
-        withCredentials: true,
-      }
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/users/signin`,
+        loginData,
+        { withCredentials: true }
+      );
 
-    );
+      setSuccess("Login successful! Redirecting...");
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 1000);
 
-    setSuccess("Login successful! Redirecting...");
-    // Handle successful login (redirect, store token, etc.)
-    setTimeout(() => {
-      window.location.href = "/dashboard"; // or wherever you want to redirect
-    }, 1000);
-
-  } catch (err) {
-    setError(
-      err.response?.data?.message || err.message || "Login failed. Please try again."
-    );
-  }finally {
-    setLoading(false);
-  }
-};
-
+    } catch (err) {
+      setError(
+        err.response?.data?.message || err.message || "Login failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleGoogleAuth = async () => {
     try {
-      // Better Auth Google OAuth redirect
       window.location.href = `${BACKEND_URL}/api/auth/signin/google`;
     } catch (err) {
       setError('Google authentication failed. Please try again.');
@@ -63,32 +57,34 @@ const handleLoginSubmit = async (e) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-black text-white p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
             Welcome Back
           </h1>
-          <p className="text-slate-600 mt-2">Sign in to your account</p>
+          <p className="text-slate-400 mt-2">Sign in to your account</p>
         </div>
 
-        <Card className="border-0 shadow-2xl bg-white/80 backdrop-blur-sm">
+        <Card className="border border-slate-800 shadow-2xl bg-[#111] text-white">
           <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-2xl font-semibold text-center">Login</CardTitle>
-            <CardDescription className="text-center text-slate-500">
+            <CardTitle className="text-2xl font-semibold text-center text-white">
+              Login
+            </CardTitle>
+            <CardDescription className="text-center text-slate-400">
               Enter your credentials to access your account
             </CardDescription>
           </CardHeader>
           
           <CardContent className="space-y-6">
             {error && (
-              <Alert variant="destructive">
+              <Alert variant="destructive" className="bg-red-950/50 border-red-700 text-red-400">
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
 
             {success && (
-              <Alert className="border-green-200 bg-green-50 text-green-800">
+              <Alert className="border-green-700 bg-green-900/30 text-green-400">
                 <AlertDescription>{success}</AlertDescription>
               </Alert>
             )}
@@ -96,7 +92,7 @@ const handleLoginSubmit = async (e) => {
             <Button 
               type="button"
               variant="outline" 
-              className="w-full h-11 border-slate-200 hover:bg-slate-50 transition-all duration-200"
+              className="w-full h-11 border-slate-700 bg-[#1a1a1a] hover:bg-slate-800 transition-all duration-200 text-slate-200"
               onClick={handleGoogleAuth}
               disabled={loading}
             >
@@ -105,24 +101,24 @@ const handleLoginSubmit = async (e) => {
             </Button>
 
             <div className="relative">
-              <Separator />
+              <Separator className="bg-slate-700" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="bg-white px-2 text-sm text-slate-500">or</span>
+                <span className="bg-[#111] px-2 text-sm text-slate-500">or</span>
               </div>
             </div>
 
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium">
+                <Label htmlFor="email" className="text-sm font-medium text-slate-300">
                   Email
                 </Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
                   <Input
                     id="email"
                     type="email"
                     placeholder="Enter your email"
-                    className="pl-10 h-11 border-slate-200 focus:border-slate-400 focus:ring-slate-400"
+                    className="pl-10 h-11 border-slate-700 bg-[#1a1a1a] text-white placeholder-slate-500 focus:border-yellow-500 focus:ring-yellow-500"
                     value={loginData.email}
                     onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                     required
@@ -131,16 +127,16 @@ const handleLoginSubmit = async (e) => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium">
+                <Label htmlFor="password" className="text-sm font-medium text-slate-300">
                   Password
                 </Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
                   <Input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Enter your password"
-                    className="pl-10 pr-10 h-11 border-slate-200 focus:border-slate-400 focus:ring-slate-400"
+                    className="pl-10 pr-10 h-11 border-slate-700 bg-[#1a1a1a] text-white placeholder-slate-500 focus:border-yellow-500 focus:ring-yellow-500"
                     value={loginData.password}
                     onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                     required
@@ -153,9 +149,9 @@ const handleLoginSubmit = async (e) => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-slate-400" />
+                      <EyeOff className="h-4 w-4 text-slate-500" />
                     ) : (
-                      <Eye className="h-4 w-4 text-slate-400" />
+                      <Eye className="h-4 w-4 text-slate-500" />
                     )}
                   </Button>
                 </div>
@@ -163,7 +159,7 @@ const handleLoginSubmit = async (e) => {
 
               <Button 
                 type="submit" 
-                className="w-full h-11 bg-slate-900 hover:bg-slate-800 text-white transition-all duration-200"
+                className="w-full h-11 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold transition-all duration-200"
                 disabled={loading}
               >
                 {loading ? (
@@ -178,10 +174,10 @@ const handleLoginSubmit = async (e) => {
             </form>
 
             <div className="text-center text-sm">
-              <span className="text-slate-600">Don't have an account? </span>
+              <span className="text-slate-400">Don't have an account? </span>
               <a
                 href="/signup"
-                className="font-medium text-slate-900 hover:text-slate-700 hover:underline transition-colors"
+                className="font-medium text-yellow-400 hover:text-yellow-300 hover:underline transition-colors"
               >
                 Sign up
               </a>
@@ -190,7 +186,7 @@ const handleLoginSubmit = async (e) => {
             <div className="text-center">
               <a
                 href="/forgot-password"
-                className="text-sm text-slate-500 hover:text-slate-700 hover:underline transition-colors"
+                className="text-sm text-slate-500 hover:text-yellow-400 hover:underline transition-colors"
               >
                 Forgot your password?
               </a>

@@ -1,8 +1,11 @@
 const knex = require("knex");
 const { Client } = require("pg");
 const { connectRedis, setKey, getKey, delKey } = require("./redis");
-
+const sendEmail = require("./mailer");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 const connections = {};
+const check=false;
 async function setupTriggers(pgClient) {
   await pgClient.query(`
     DO $$
@@ -54,6 +57,17 @@ const getDbConnection = async (connectionUrl) => {
         const schema = await extractDatabaseSchema(dbInstance);
         await setKey(`project:${connectionUrl}`, JSON.stringify(schema));
         console.log(`Database schema for ${connectionUrl} updated in Redis`);
+      }
+      if(check){
+        const project=await prisma.project.findFirst({
+          where:{dbUrl:connectionUrl}
+        });
+        const emailData = {
+          to: project.user.email,
+          subject: "Database Schema Changed",
+          html: `<p>The schema for your project "${project.title}" has changed.</p>`,
+        }
+        sendEmail(emailData);
       }
     });
     await pgClient.query("LISTEN db_change");

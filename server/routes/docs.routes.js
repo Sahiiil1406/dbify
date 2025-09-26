@@ -3,7 +3,7 @@ const {visualizeSchema}=require('../controllers/visualiser')
 const express=require('express');
 const router=express.Router();
 
-router.post('/visualize',visualizeSchema);
+router.get('/visualize/:projectId',visualizeSchema);
 router.get('/:projectId',getDocs);
 
 module.exports=router;
