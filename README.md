@@ -2,7 +2,7 @@
 
 Stop wrestling with database connections and API boilerplate. Dbify gives you production-ready, auto-scaling APIs in seconds—directly on your existing database. Perfect for hackathons, rapid prototyping, and enterprise applications.
 
-🌐 One Platform, Every Database – Whether you're using SQL, NoSQL, Graph, Vector, or reactive databases, Dbify speaks your database's language. We seamlessly connect to PostgreSQL, MongoDB, Neo4j, Pinecone, Convex, and everything in between.(Currently supports only SQL databases)
+🌐 One Platform, Every Database – Whether you're using SQL, NoSQL, Graph, Vector, or reactive databases, Dbify speaks your database's language. We seamlessly connect to PostgreSQL, MongoDB, Neo4j, Pinecone, Convex, and everything in between.(Currently it supports SQL databases like postgresql and non sql databases like mongodb)
 
 ✅ Your data, your rules – Dbify never moves or replicates your data. Zero vendor lock-in. Full control.
 ---
