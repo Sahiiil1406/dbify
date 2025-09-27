@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     path:'/dashboard',
     element: <ProjectsDashboard />,
   },{
-    path:'/project/:projectId',
+    path:'/projects/:projectId',
     element: <Project />,
   },{
     path:'/docs/:projectId',

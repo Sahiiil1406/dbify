@@ -2,6 +2,7 @@ const DatabaseCRUD=require('../CRUD/crud')
 const { PrismaClient } = require("@prisma/client");
 const {getDbConnection,extractDatabaseSchema}=require('../config/connection-management')
 const {setKey,getKey,delKey}=require('../config/redis');
+const mongohelper=require('../mongo/main');
 const prisma = new PrismaClient();
 
 const mainDBFunc=async(req,res)=>{
@@ -11,7 +12,11 @@ const mainDBFunc=async(req,res)=>{
     })
     if(!project) return res.status(404).json({ error: 'Project not found' });
     if(project.apiKey !== apiKey) return res.status(403).json({ error: 'Access denied' });
-    //console.log(project);
+    console.log(project);
+    if(project.dbType=="mongodb"){
+        const data=await mongohelper(project.dbUrl,operation,tableName,payload);
+        return res.status(200).json(data);
+    }
     const dbUrl=project.dbUrl;
     const db=await getDbConnection(dbUrl);
     let schema=await getKey(`project:${project.dbUrl}`);
