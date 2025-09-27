@@ -1,9 +1,10 @@
 # Dbify
 
-Dbify is a unified platform that instantly generates secure, production-ready APIs on top of any database—whether it’s SQL (PostgreSQL, MySQL), NoSQL (MongoDB, Cassandra), reactive (Convex), graph (Neo4j), or vector (Pinecone, Weaviate)—by abstracting away complexity and exposing feature-rich, auto-scaled APIs without the need for schema migrations or data replication.
+Stop wrestling with database connections and API boilerplate. Dbify gives you production-ready, auto-scaling APIs in seconds—directly on your existing database. Perfect for hackathons, rapid prototyping, and enterprise applications.
 
-✅ **Your data, your control** – Dbify never replicates or moves your data, ensuring zero vendor lock-in.
+🌐 One Platform, Every Database – Whether you're using SQL, NoSQL, Graph, Vector, or reactive databases, Dbify speaks your database's language. We seamlessly connect to PostgreSQL, MongoDB, Neo4j, Pinecone, Convex, and everything in between.(Currently supports only SQL databases)
 
+✅ Your data, your rules – Dbify never moves or replicates your data. Zero vendor lock-in. Full control.
 ---
 
 ## 🚀 Features
@@ -13,7 +14,7 @@ Dbify is a unified platform that instantly generates secure, production-ready AP
 * Generate full CRUD APIs by simply providing a DB connection URL.
 * Endpoints auto-generated for every table/collection.
 
-### 🔹 User Dashboard
+### 🔹 Realtime User Dashboard
 
 * View project details, API keys, and activity logs.
 * Logs include:
@@ -42,7 +43,7 @@ Dbify is a unified platform that instantly generates secure, production-ready AP
 * **Elasticsearch** integration for full-text search.
 * **Vector DB** integration for semantic search.
 
-### 🔹 Enterprise Authentication (Better-Auth)
+### 🔹 Secure Authentication (Better-Auth)
 
 *  Social sign-on (Google, GitHub, Discord, Twitter)
 *  Role-Based Access Control (Admin, Developer, Viewer)
@@ -58,9 +59,13 @@ Dbify is a unified platform that instantly generates secure, production-ready AP
 
 * Built-in API documentation.
 * API linter for consistent design.
-* Cron job support for scheduled operations.
-* AI-powered assistant (trained on Postgres, React, & your schema).
 
+### 🔹 Inkeep AI Agent 
+* Auto-generated interactive API documentation.
+* Powered by two MCP tools:
+  - DB MCP for database grounding.
+  - Scraped Data MCP from Firecrawl for external docs.
+* Semantic search for instant examples and contextual assistance.
 ---
 
 ## 📐 System Architecture
@@ -118,11 +123,13 @@ Dbify is a unified platform that instantly generates secure, production-ready AP
 * **Analytics**: Convex 
 * **Queue**: RabbitMQ
 * **Workers**: Node.js
-* **Search**: Elasticsearch, Vector DBs
+* **Search**: Elasticsearch, Chroma Db(Vector DB)
 * **Cache**: Redis
 * **Connection Management**: PgBouncer
 * **Notifications**: ReSend
 * **Auth**: Better-Auth
+* **Data Scraping**: FireCrawl
+* **AI Agent**:InKeep,OpenAI 
 
 ---
 
@@ -226,34 +233,9 @@ curl -X POST https://api.dbify.com/query \
 
 ## ✅ Roadmap / Next Features
 
-### 1. Convex → Real-Time Dashboard(Done)
+### 1. Support for more databases
+### 2. AI Agent for automated testing
+### 3.Voice Assistant support
+### 4.Client side sdk to enhance developer experience and easy to integrate it
 
-* Live usage stats (req count, response times)
-* Instant schema change notifications
-* Collaborative dashboards
 
-### 2. Better-Auth → Advanced RBAC
-
-* Team roles: Admin, Developer, Viewer
-* OAuth provider integrations (Google, GitHub, Discord, Twitter)
-* Granular API key permissions
-
-### 3. Firecrawl → Docs Scraping
-
-* Scrape external docs for chatbot grounding
-* AI-driven contextual assistant
-
-### 4. Scorecard → API Monitoring
-
-* Latency, error rate, uptime
-* Project reliability via **Dbify Health Score**
-
-### 5. Inkeep → AI Docs + Smart Search
-
-* Auto-generated interactive API docs
-* Semantic search for instant examples
-
-### 6. Vapi + Resend → Voice + Email APIs
-
-* Voice-triggered CRUD operations
-* Email confirmation with results
