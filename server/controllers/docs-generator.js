@@ -90,6 +90,10 @@ const getDocs=async(req,res)=>{
           where: { id: Number(projectId) },
         })
         //console.log("Project:",project);
+        // if(project.dbType=="mongodb"){
+        //   const schema=await 
+        // }
+          
         let schema=await getKey(`project:${project.dbUrl}`);
         if(!schema){
             const db= getDbConnection(project.dbUrl);
