@@ -1,6 +1,6 @@
 # Dbify
 
-Stop wrestling with database connections and API boilerplate. **Dbify** gives you production-ready, auto-scaling APIs in seconds—directly on your existing database. Perfect for hackathons, rapid prototyping, and enterprise applications.
+Tired of dealing with database connections, boilerplate code, and fragile APIs? Dbify instantly turns your database into a production-ready, auto-scaling API—no server setup. Perfect for prototypes, internal tools, or enterprise apps. Fully documented APIs, real-time analytics, and secure access let you focus on building your product, not infrastructure.
 
 🌐 **One Platform, Every Database** – Works across SQL, NoSQL, Graph, Vector, and reactive databases (currently supports PostgreSQL & MongoDB).
 
