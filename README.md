@@ -18,12 +18,12 @@ Tired of dealing with database connections, boilerplate code, and fragile APIs? 
 * 📢 **Smart Notifications** – Alerts for schema updates, spikes & team activity.
 * 🔎 **Advanced Queries & Search** – SQL/NoSQL builder, full-text + semantic vector search.
 * 👨‍💻 **Developer Friendly** – Auto API docs, CLI, SDKs & built-in linter.
-* 🤖 **AI-Powered Docs (Inkeep)** – Conversational agent + Firecrawl-scraped docs + semantic search.
+* 🤖 **AI-Agent (Inkeep)** – Conversational agent + Firecrawl-scraped docs + semantic search.
 
 ---
 
 ## 📐 System Architecture
-<img width="5935" height="3174" alt="image" src="https://github.com/user-attachments/assets/af123308-df9a-416d-bd35-eae2c3626e1d" />
+<img width="5935" height="3174" alt="image" src="https://github.com/user-attachments/assets/9bc7665d-783a-4a91-aea3-a80c2bdcbab1" />
 
 ### High-Level Flow
 
