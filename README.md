@@ -23,21 +23,20 @@ Tired of dealing with database connections, boilerplate code, and fragile APIs? 
 ---
 
 ## 📐 System Architecture
-<!-- <img width="5196" height="2965" alt="dbify" src="https://github.com/user-attachments/assets/3bfca9cb-a87f-4920-9159-6166cba77a67" /> -->
-<img width="6040" height="3205" alt="image" src="https://github.com/user-attachments/assets/ce1dd40c-954b-4f56-becf-e11cb51a27e7" />
+<img width="5935" height="3174" alt="image" src="https://github.com/user-attachments/assets/af123308-df9a-416d-bd35-eae2c3626e1d" />
 
 ### High-Level Flow
 
 1. User provides DB connection → **Dbify Server** validates, returns `apiKey` & `projectId`, caches schema.
 2. Schema changes auto-update cache + notify users.
-3. Logs pushed to queue, processed by workers, stored in **ClickHouse**.
+3. Logs pushed to queue, processed by workers, stored in **Convex**.
 4. Dashboard shows real-time usage, analytics & schema events.
 
 ### Subsystems
 
 * **Auth**: Better-Auth for RBAC + secure keys.
 * **Notifications**: Resend for alerts & team invites.
-* **Analytics**: Convex (real-time) + ClickHouse (historical).
+* **Analytics**: Convex (real-time) .
 * **Scaling**: Redis cache + PgBouncer pooling.
 
 ---
