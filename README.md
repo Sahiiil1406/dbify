@@ -23,8 +23,8 @@ Tired of dealing with database connections, boilerplate code, and fragile APIs? 
 ---
 
 ## 📐 System Architecture
-
-<img width="1861" height="916" alt="system-architecture" src="https://github.com/user-attachments/assets/3188d43f-823a-4c04-8e25-2edad4ba235a" />
+<!-- <img width="5196" height="2965" alt="dbify" src="https://github.com/user-attachments/assets/3bfca9cb-a87f-4920-9159-6166cba77a67" /> -->
+<img width="6040" height="3205" alt="image" src="https://github.com/user-attachments/assets/ce1dd40c-954b-4f56-becf-e11cb51a27e7" />
 
 ### High-Level Flow
 
