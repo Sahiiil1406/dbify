@@ -228,15 +228,15 @@ const ProjectsDashboard = () => {
       project.description?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // DB badge colors with yellow accent theme
+  // DB badge colors with unified theme
   const getDbTypeColor = (dbType) => {
     const colors = {
-      postgresql: "bg-blue-500/20 text-blue-400 border border-blue-500/30",
-      mysql: "bg-orange-500/20 text-orange-400 border border-orange-500/30",
-      mongodb: "bg-green-500/20 text-green-400 border border-green-500/30",
-      sqlite: "bg-purple-500/20 text-purple-400 border border-purple-500/30",
+      postgresql: "info",
+      mysql: "warning", 
+      mongodb: "success",
+      sqlite: "secondary",
     };
-    return colors[dbType] || "bg-gray-500/20 text-gray-400 border border-gray-500/30";
+    return colors[dbType] || "secondary";
   };
 
   // Format date
@@ -265,7 +265,7 @@ const ProjectsDashboard = () => {
                 </p>
               </div>
             </div>
-            <Badge className="text-xs font-medium bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-3 py-1">
+            <Badge className="text-xs font-medium">
               {projects.length} {projects.length === 1 ? "project" : "projects"}
             </Badge>
           </div>
@@ -579,11 +579,11 @@ const ProjectsDashboard = () => {
 
                   {/* Badges */}
                   <div className="flex flex-wrap gap-2">
-                    <Badge className={getDbTypeColor(project.dbType)}>
+                    <Badge variant={getDbTypeColor(project.dbType)}>
                       <Database className="h-3 w-3 mr-1" />
                       {project.dbType}
                     </Badge>
-                    <Badge className="bg-gray-500/20 text-gray-300 border border-gray-500/30">
+                    <Badge variant="secondary">
                       <Calendar className="h-3 w-3 mr-1" />
                       {formatDate(project.createdAt)}
                     </Badge>
