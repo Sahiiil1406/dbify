@@ -7,7 +7,7 @@ Tired of dealing with database connections, boilerplate code, and fragile APIs? 
 ✅ **Your data, your rules** – Dbify never replicates or moves your data. Zero vendor lock-in. Full control.
 
 The next step is to expand beyond traditional databases to support object stores like S3 and decentralized storage solutions like IPFS, making Dbify a truly universal data access layer.
----
+
 
 ## 🚀 Features
 
