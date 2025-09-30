@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import Navbar from '../components/Navbar';
 const ChatInterface = () => {
   const [messages, setMessages] = useState([
     {
@@ -162,6 +163,8 @@ const ChatInterface = () => {
   ];
 
   return (
+   <>
+    
     <div className="flex h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
       {/* Sidebar */}
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-gray-900/95 backdrop-blur-sm border-r border-yellow-500/20 flex flex-col transition-all duration-300 relative`}>
@@ -427,6 +430,7 @@ const ChatInterface = () => {
         )}
       </div>
     </div>
+   </>
   );
 };
 
