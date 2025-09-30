@@ -2,54 +2,101 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+/* Unified Design System - Dbify Theme */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(1.0000 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.705 0.015 286.067);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.21 0.006 285.885);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.705 0.015 286.067);
+  /* Core Brand Colors */
+  --dbify-black: #0a0a0a;
+  --dbify-gray-950: #0f0f0f;
+  --dbify-gray-900: #111111;
+  --dbify-gray-800: #1a1a1a;
+  --dbify-gray-700: #262626;
+  --dbify-gray-600: #404040;
+  --dbify-gray-500: #737373;
+  --dbify-gray-400: #a3a3a3;
+  --dbify-gray-300: #d4d4d4;
+  --dbify-gray-200: #e5e5e5;
+  --dbify-gray-100: #f5f5f5;
+  
+  /* Yellow Accent System */
+  --dbify-yellow-400: #facc15;
+  --dbify-yellow-500: #eab308;
+  --dbify-yellow-600: #ca8a04;
+  
+  /* Semantic Colors */
+  --dbify-success: #22c55e;
+  --dbify-warning: #f97316;
+  --dbify-error: #ef4444;
+  --dbify-info: #3b82f6;
+  
+  /* Unified Theme Variables */
+  --background: var(--dbify-black);
+  --foreground: var(--dbify-gray-100);
+  --card: var(--dbify-gray-900);
+  --card-foreground: var(--dbify-gray-100);
+  --popover: var(--dbify-gray-900);
+  --popover-foreground: var(--dbify-gray-100);
+  --primary: var(--dbify-yellow-500);
+  --primary-foreground: var(--dbify-black);
+  --secondary: var(--dbify-gray-800);
+  --secondary-foreground: var(--dbify-gray-100);
+  --muted: var(--dbify-gray-800);
+  --muted-foreground: var(--dbify-gray-400);
+  --accent: var(--dbify-yellow-500);
+  --accent-foreground: var(--dbify-black);
+  --destructive: var(--dbify-error);
+  --destructive-foreground: white;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: var(--dbify-gray-800);
+  --ring: var(--dbify-yellow-500);
+  
+  /* Chart Colors */
+  --chart-1: var(--dbify-yellow-500);
+  --chart-2: var(--dbify-info);
+  --chart-3: var(--dbify-success);
+  --chart-4: var(--dbify-warning);
+  --chart-5: var(--dbify-error);
+  
+  /* Sidebar Colors */
+  --sidebar: var(--dbify-black);
+  --sidebar-foreground: var(--dbify-gray-100);
+  --sidebar-primary: var(--dbify-yellow-500);
+  --sidebar-primary-foreground: var(--dbify-black);
+  --sidebar-accent: var(--dbify-gray-800);
+  --sidebar-accent-foreground: var(--dbify-gray-100);
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: var(--dbify-yellow-500);
+  
+  /* Typography */
   --font-sans: Inter, sans-serif;
   --font-serif: Source Serif 4, serif;
   --font-mono: JetBrains Mono, monospace;
-  --radius: 0.625rem;
-  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
-  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
-  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
-  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
-  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
-  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  
+  /* Modern Spacing & Borders */
+  --radius: 0.75rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  
+  /* Enhanced Shadows */
+  --shadow-2xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-xs: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* Glass morphism effects */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  
+  /* Animation & Spacing */
   --tracking-normal: 0em;
   --spacing: 0.25rem;
-  --shadow-color: oklch(0 0 0);
+  --shadow-color: #000000;
   --shadow-opacity: 0.1;
   --shadow-blur: 3px;
   --shadow-spread: 0px;
@@ -58,59 +105,42 @@
   --letter-spacing: 0em;
 }
 
+/* Dark theme (primary theme for Dbify) */
 .dark {
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.92 0.004 286.32);
-  --primary-foreground: oklch(0.21 0.006 285.885);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(1.0000 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.552 0.016 285.938);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.552 0.016 285.938);
-  --font-sans: Inter, sans-serif;
-  --font-serif: Source Serif 4, serif;
-  --font-mono: JetBrains Mono, monospace;
-  --radius: 0.375rem;
-  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
-  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
-  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
-  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
-  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
-  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
-  --shadow-color: oklch(0 0 0);
-  --shadow-opacity: 0.1;
-  --shadow-blur: 3px;
-  --shadow-spread: 0px;
-  --shadow-offset-x: 0;
-  --shadow-offset-y: 1px;
-  --letter-spacing: 0em;
-  --spacing: 0.25rem;
+  --background: var(--dbify-black);
+  --foreground: var(--dbify-gray-100);
+  --card: var(--dbify-gray-900);
+  --card-foreground: var(--dbify-gray-100);
+  --popover: var(--dbify-gray-900);
+  --popover-foreground: var(--dbify-gray-100);
+  --primary: var(--dbify-yellow-500);
+  --primary-foreground: var(--dbify-black);
+  --secondary: var(--dbify-gray-800);
+  --secondary-foreground: var(--dbify-gray-100);
+  --muted: var(--dbify-gray-800);
+  --muted-foreground: var(--dbify-gray-400);
+  --accent: var(--dbify-yellow-500);
+  --accent-foreground: var(--dbify-black);
+  --destructive: var(--dbify-error);
+  --destructive-foreground: white;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: var(--dbify-gray-800);
+  --ring: var(--dbify-yellow-500);
+  
+  --chart-1: var(--dbify-yellow-500);
+  --chart-2: var(--dbify-info);
+  --chart-3: var(--dbify-success);
+  --chart-4: var(--dbify-warning);
+  --chart-5: var(--dbify-error);
+  
+  --sidebar: var(--dbify-black);
+  --sidebar-foreground: var(--dbify-gray-100);
+  --sidebar-primary: var(--dbify-yellow-500);
+  --sidebar-primary-foreground: var(--dbify-black);
+  --sidebar-accent: var(--dbify-gray-800);
+  --sidebar-accent-foreground: var(--dbify-gray-100);
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: var(--dbify-yellow-500);
 }
 
 @theme inline {
@@ -147,14 +177,15 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-sans: Inter, sans-serif;
-  --font-mono: JetBrains Mono, monospace;
-  --font-serif: Source Serif 4, serif;
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius: var(--radius);
 
   --shadow-2xs: var(--shadow-2xs);
   --shadow-xs: var(--shadow-xs);
@@ -171,7 +202,6 @@
   --tracking-wide: calc(var(--tracking-normal) + 0.025em);
   --tracking-wider: calc(var(--tracking-normal) + 0.05em);
   --tracking-widest: calc(var(--tracking-normal) + 0.1em);
-  --radius: 0.375rem;
   --spacing: var(--spacing);
   --letter-spacing: var(--letter-spacing);
   --shadow-offset-y: var(--shadow-offset-y);
@@ -182,16 +212,72 @@
   --color-shadow-color: var(--shadow-color);
 }
 
+/* Global base styles for Dbify theme */
 body {
   letter-spacing: var(--tracking-normal);
+  background: var(--background);
+  color: var(--foreground);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  
   body {
     @apply bg-background text-foreground;
     letter-spacing: var(--tracking-normal);
+  }
+  
+  /* Enhanced glass morphism utilities */
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  .glass-card {
+    background: rgba(17, 17, 17, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  
+  /* Enhanced gradients */
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--dbify-yellow-400), var(--dbify-yellow-600));
+  }
+  
+  .gradient-card {
+    background: linear-gradient(135deg, var(--dbify-gray-900), var(--dbify-gray-950));
+  }
+  
+  /* Consistent hover effects */
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  /* Modern scroll bars */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--dbify-gray-900);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--dbify-gray-600);
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--dbify-yellow-500);
   }
 }

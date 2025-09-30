@@ -51,34 +51,38 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-black text-white p-4 relative overflow-hidden">
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-950 to-black"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(250,204,21,0.1),transparent_50%)]"></div>
+      
+      <div className="w-full max-w-md relative z-10">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
             Get Started
           </h1>
-          <p className="text-slate-400 mt-2">Create your account today</p>
+          <p className="text-gray-400 mt-2">Create your account today</p>
         </div>
 
-        <Card className="border border-slate-800 shadow-2xl bg-[#111] text-white">
+        <Card className="glass-card shadow-2xl">
           <CardHeader className="space-y-1 pb-4">
             <CardTitle className="text-2xl font-semibold text-center text-white">
               Sign Up
             </CardTitle>
-            <CardDescription className="text-center text-slate-400">
+            <CardDescription className="text-center text-gray-400">
               Fill in your details to create an account
             </CardDescription>
           </CardHeader>
 
           <CardContent className="space-y-6">
             {error && (
-              <Alert variant="destructive" className="bg-red-950/50 border-red-700 text-red-400">
+              <Alert variant="destructive" className="bg-red-950/50 border-red-500/30 text-red-400">
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
 
             {success && (
-              <Alert className="border-green-700 bg-green-900/30 text-green-400">
+              <Alert className="border-green-500/30 bg-green-900/30 text-green-400">
                 <AlertDescription>{success}</AlertDescription>
               </Alert>
             )}
@@ -86,7 +90,7 @@ const SignupPage = () => {
             <Button
               type="button"
               variant="outline"
-              className="w-full h-11 border-slate-700 bg-[#1a1a1a] hover:bg-slate-800 transition-all duration-200 text-slate-200"
+              className="w-full"
               onClick={handleGoogleAuth}
               disabled={loading}
             >
@@ -95,24 +99,24 @@ const SignupPage = () => {
             </Button>
 
             <div className="relative">
-              <Separator className="bg-slate-700" />
+              <Separator className="bg-white/10" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="bg-[#111] px-2 text-sm text-slate-500">or</span>
+                <span className="bg-gray-900 px-3 text-sm text-gray-500">or</span>
               </div>
             </div>
 
             <form onSubmit={handleSignupSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-sm font-medium text-slate-300">
+                <Label htmlFor="name" className="text-sm font-medium text-gray-300">
                   Full Name
                 </Label>
                 <div className="relative">
-                  <User className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
                   <Input
                     id="name"
                     type="text"
                     placeholder="Enter your full name"
-                    className="pl-10 h-11 border-slate-700 bg-[#1a1a1a] text-white placeholder-slate-500 focus:border-yellow-500 focus:ring-yellow-500"
+                    className="pl-10"
                     value={signupData.name}
                     onChange={(e) => setSignupData({ ...signupData, name: e.target.value })}
                     required
@@ -121,16 +125,16 @@ const SignupPage = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium text-slate-300">
+                <Label htmlFor="email" className="text-sm font-medium text-gray-300">
                   Email Address
                 </Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
                   <Input
                     id="email"
                     type="email"
                     placeholder="Enter your email"
-                    className="pl-10 h-11 border-slate-700 bg-[#1a1a1a] text-white placeholder-slate-500 focus:border-yellow-500 focus:ring-yellow-500"
+                    className="pl-10"
                     value={signupData.email}
                     onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
                     required
@@ -139,16 +143,16 @@ const SignupPage = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="signup-password" className="text-sm font-medium text-slate-300">
+                <Label htmlFor="signup-password" className="text-sm font-medium text-gray-300">
                   Password
                 </Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
                   <Input
                     id="signup-password"
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Create a password"
-                    className="pl-10 pr-10 h-11 border-slate-700 bg-[#1a1a1a] text-white placeholder-slate-500 focus:border-yellow-500 focus:ring-yellow-500"
+                    className="pl-10 pr-12"
                     value={signupData.password}
                     onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
                     required
@@ -158,32 +162,41 @@ const SignupPage = () => {
                     type="button"
                     variant="ghost"
                     size="sm"
-                    className="absolute right-2 top-2 h-7 w-7 p-0 hover:bg-transparent"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-transparent"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-slate-500" />
+                      <EyeOff className="h-4 w-4 text-gray-500" />
                     ) : (
-                      <Eye className="h-4 w-4 text-slate-500" />
+                      <Eye className="h-4 w-4 text-gray-500" />
                     )}
                   </Button>
                 </div>
-                <p className="text-xs text-slate-500">Password must be at least 6 characters long</p>
+                <p className="text-xs text-gray-500">Password must be at least 6 characters long</p>
               </div>
 
-              <div className="flex items-center space-x-2">
-                <input type="checkbox" id="terms" className="rounded border-slate-700 bg-[#1a1a1a]" required />
-                <Label htmlFor="terms" className="text-sm text-slate-400">
+              <div className="flex items-center space-x-3">
+                <input 
+                  type="checkbox" 
+                  id="terms" 
+                  className="rounded border-white/20 bg-gray-900/50 text-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-offset-0" 
+                  required 
+                />
+                <Label htmlFor="terms" className="text-sm text-gray-400 cursor-pointer">
                   I agree to the{' '}
-                  <a href="/terms" className="text-yellow-400 hover:underline">Terms of Service</a>{' '}
+                  <a href="/terms" className="text-yellow-400 hover:text-yellow-300 hover:underline transition-colors">
+                    Terms of Service
+                  </a>{' '}
                   and{' '}
-                  <a href="/privacy" className="text-yellow-400 hover:underline">Privacy Policy</a>
+                  <a href="/privacy" className="text-yellow-400 hover:text-yellow-300 hover:underline transition-colors">
+                    Privacy Policy
+                  </a>
                 </Label>
               </div>
 
               <Button
                 type="submit"
-                className="w-full h-11 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold transition-all duration-200"
+                className="w-full"
                 disabled={loading}
               >
                 {loading ? (
@@ -198,7 +211,7 @@ const SignupPage = () => {
             </form>
 
             <div className="text-center text-sm">
-              <span className="text-slate-400">Already have an account? </span>
+              <span className="text-gray-400">Already have an account? </span>
               <a
                 href="/login"
                 className="font-medium text-yellow-400 hover:text-yellow-300 hover:underline transition-colors"
