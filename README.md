@@ -45,10 +45,10 @@ Tired of dealing with database connections, boilerplate code, and fragile APIs? 
 
 * **Backend**: Node.js / Express
 * **Primary DB**: PostgreSQL
-* **Analytics**: Convex + ClickHouse
+* **Analytics**: Convex 
 * **Queue**: RabbitMQ
 * **Workers**: Node.js
-* **Search**: Elasticsearch, ChromaDB (Vector DB)
+* **Search**: ChromaDB (Vector DB)
 * **Cache**: Redis
 * **Connection Management**: PgBouncer
 * **Notifications**: Resend
