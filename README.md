@@ -83,12 +83,6 @@ Include `projectId` + `apiKey` in every request header or payload.
 * **Schema Sync**: Endpoints auto-refresh on schema changes
 
 ---
-<img width="1854" height="936" alt="docs1" src="https://github.com/user-attachments/assets/a61b8bc1-f568-453b-ae06-bb8852ab6fa4" />
-
-<img width="1552" height="822" alt="docs2" src="https://github.com/user-attachments/assets/223e953b-a000-4d48-b28b-aaf18e21112a" />
-
-<img width="1538" height="939" alt="docs3" src="https://github.com/user-attachments/assets/496b53e7-6f19-4989-b9d6-4d456e7968b0" />
-
 ### 📘 Example API Usage
 
 #### Read
@@ -167,3 +161,24 @@ curl -X POST https://api.dbify.com/query \
 2. 🤖 AI Agent for automated API testing
 3. 🎙️ Voice assistant integration for dev workflows
 4. 📦 Client SDKs in multiple languages for faster adoption
+
+
+## Screen shots
+<img width="1563" height="924" alt="image" src="https://github.com/user-attachments/assets/b216e00d-fdc5-4555-a6ea-555174ffceca" />
+<img width="977" height="905" alt="image" src="https://github.com/user-attachments/assets/53fd53d2-943b-424c-89ca-76367054d245" />
+<img width="1613" height="928" alt="image" src="https://github.com/user-attachments/assets/ce456526-ef56-48f5-ba94-1d7f276b17cf" />
+<img width="1831" height="937" alt="image" src="https://github.com/user-attachments/assets/5994cd8f-df42-40a1-b6c1-cbf4fce761d9" />
+
+<img width="1854" height="936" alt="docs1" src="https://github.com/user-attachments/assets/a61b8bc1-f568-453b-ae06-bb8852ab6fa4" />
+<img width="1552" height="822" alt="docs2" src="https://github.com/user-attachments/assets/223e953b-a000-4d48-b28b-aaf18e21112a" />
+
+<img width="1080" height="573" alt="image" src="https://github.com/user-attachments/assets/5e5b9e86-05f1-4170-99f8-7bee74721169" />
+<img width="1538" height="939" alt="docs3" src="https://github.com/user-attachments/assets/496b53e7-6f19-4989-b9d6-4d456e7968b0" />
+
+<img width="1843" height="928" alt="image" src="https://github.com/user-attachments/assets/37a9aeba-94b7-4847-8edd-5d9b6c0969a6" />
+
+<img width="1723" height="922" alt="image" src="https://github.com/user-attachments/assets/256882d2-5e1f-40af-8ca2-0a4e9da06d46" />
+<img width="1859" height="941" alt="image" src="https://github.com/user-attachments/assets/1eff0fde-b755-4401-9888-31aba70622f1" />
+
+<img width="1850" height="884" alt="image" src="https://github.com/user-attachments/assets/b902a983-067d-432b-bac5-664855742b72" />
+<img width="1835" height="927" alt="image" src="https://github.com/user-attachments/assets/d2746e90-76a2-437a-9e9e-c02e4b357742" />
